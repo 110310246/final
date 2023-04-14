@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "Compiling House.java",
+      "setup": "",
+      "run": "javac House.java",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Compling HouseBuilderTest.java",
+      "setup": "",
+      "run": "javac HouseBuilderTest.java",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Output Test",
+      "setup": "",
+      "run": "java HouseBuilderTest",
+      "input": "",
+      "output": "House: Pioneer Buidling\r\nAge: 1, Rooms: 100, Swimming Pool: false\r\nAddress: No. 1, ZhongXiao East Road",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 60
+    }
+  ]
+}
