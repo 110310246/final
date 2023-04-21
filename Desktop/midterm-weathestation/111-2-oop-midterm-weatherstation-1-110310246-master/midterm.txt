@@ -1,0 +1,48 @@
+public class WeatherData {
+    
+    private int temperature;
+    private int humidity;
+    private int pressure;
+    
+    public WeatherData(int temperature, int humidity, int pressure) {
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.pressure = pressure;
+    }
+    
+    public int getTemperature() {
+        return temperature;
+    }
+    
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+    
+    public int getHumidity() {
+        return humidity;
+    }
+    
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
+    }
+    
+    public int getPressure() {
+        return pressure;
+    }
+    
+    public void setPressure(int pressure) {
+        this.pressure = pressure;
+    }
+    
+    public String toString() {
+        return "Temperature: " + temperature + " Humidity: " + humidity + " Pressure: " + pressure;
+
+    public static void main(String[] args) {
+        WeatherData data = new WeatherData(25, 60, 1013);
+        System.out.println(data); // output: Temperature: 25 Humidity: 60 Pressure: 1013
+
+        data.setTemperature(26);
+        System.out.println(data); // output: Temperature: 26 Humidity: 60 Pressure: 1013
+    }
+}
+
