@@ -1,0 +1,100 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class Tetris extends JPanel implements ActionListener {
+    private final int BOARD_WIDTH = 10;
+    private final int BOARD_HEIGHT = 22;
+    private final int DELAY = 300;
+
+    private Timer timer;
+    private boolean isFallingFinished = false;
+    private boolean isPaused = false;
+    private int numLinesRemoved = 0;
+    private int curX = 0;
+    private int curY = 0;
+    private Shape curPiece;
+    private Shape.Tetrominoes[] board;
+
+    public Tetris() {
+        initBoard();
+    }
+
+    private void initBoard() {
+        setFocusable(true);
+        addKeyListener(new TAdapter());
+        setBackground(Color.BLACK);
+        setPreferredSize(new Dimension(300, 600));
+
+        curPiece = new Shape();
+        timer = new Timer(DELAY, this);
+        timer.start();
+
+        board = new Shape.Tetrominoes[BOARD_WIDTH * BOARD_HEIGHT];
+        clearBoard();
+    }
+
+    private void clearBoard() {
+        for (int i = 0; i < BOARD_WIDTH * BOARD_HEIGHT; i++) {
+            board[i] = Shape.Tetrominoes.NoShape;
+        }
+    }
+
+    private void dropDown() {
+        while (curY < BOARD_HEIGHT - 1 && isValidMove(curPiece, curX, curY + 1)) {
+            curY++;
+        }
+        pieceDropped();
+    }
+
+    private void oneLineDown() {
+        if (!isValidMove(curPiece, curX, curY + 1)) {
+            pieceDropped();
+        }
+    }
+
+    private void pieceDropped() {
+        for (int i = 0; i < 4; i++) {
+            int x = curX + curPiece.x(i);
+            int y = curY - curPiece.y(i);
+            board[y * BOARD_WIDTH + x] = curPiece.getShape();
+        }
+        removeFullLines();
+
+        if (!isFallingFinished) {
+            newPiece();
+        }
+    }
+
+    private void removeFullLines() {
+        int numFullLines = 0;
+        for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
+            boolean lineIsFull = true;
+            for (int j = 0; j < BOARD_WIDTH; j++) {
+                if (board[i * BOARD_WIDTH + j] == Shape.Tetrominoes.NoShape) {
+                    lineIsFull = false;
+                    break;
+                }
+            }
+            if (lineIsFull) {
+                numFullLines++;
+                for (int k = i; k < BOARD_HEIGHT - 1; k++) {
+                    for (int j = 0; j < BOARD_WIDTH; j++) {
+                        board[k * BOARD_WIDTH + j] = board[(k + 1) * BOARD_WIDTH + j];
+                    }
+                }
+            }
+        }
+
+        if (numFullLines > 0) {
+            numLinesRemoved += numFullLines;
+            isFallingFinished = true;
+            curPiece.set
