@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "Connection Test",
+      "setup": "",
+      "run": "gradle test --tests 'org.aiotlab.TetrisServerClientTest.testConnection'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    },
+    {
+      "name": "Game Launch Test",
+      "setup": "",
+      "run": "gradle test --tests 'org.aiotlab.TetrisServerClientTest.testCommandStart'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    },
+    {
+      "name": "Image Reception Test",
+      "setup": "",
+      "run": "gradle test --tests 'org.aiotlab.TetrisServerClientTest.testReceivedImage'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    },
+    {
+      "name": "Removing Lines Test",
+      "setup": "",
+      "run": "gradle test --tests 'org.aiotlab.TetrisServerClientTest.testRemoveLines'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 25
+    }
+  ]
+}
